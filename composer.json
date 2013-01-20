@@ -1,0 +1,23 @@
+{
+    "name": "mustache/silex-provider",
+    "description": "A Mustache service provider for Silex.",
+    "keywords": ["templating", "mustache", "silex"],
+    "homepage": "https://github.com/bobthecow/mustache-silex-provider",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Justin Hileman",
+            "email": "justin@justinhileman.info",
+            "homepage": "http://justinhileman.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "silex/silex": "1.0.*",
+        "mustache/mustache": "2.1.*"
+    },
+    "autoload": {
+        "psr-0": { "Mustache": "src/" }
+    }
+}
