@@ -15,7 +15,7 @@
     "require": {
         "php": ">=5.3.3",
         "silex/silex": "1.0.*@dev",
-        "mustache/mustache": "~2.1"
+        "mustache/mustache": "dev-dev"
     },
     "autoload": {
         "psr-0": { "Mustache": "src/" }
