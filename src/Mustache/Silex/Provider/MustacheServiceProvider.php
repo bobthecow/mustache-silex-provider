@@ -32,10 +32,9 @@ class MustacheServiceProvider implements ServiceProviderInterface
                 'charset'         => $app['charset'],
             );
 
-            // TODO: add logger once Silex ships PSR-3 compatiblity
-            // if (isset($app['logger'])) {
-            //     $defaults['logger'] = $app['logger'];
-            // }
+            if (isset($app['logger'])) {
+                $defaults['logger'] = $app['logger'];
+            }
 
             $app['mustache.options'] = array_replace($defaults, $app['mustache.options']);
 
