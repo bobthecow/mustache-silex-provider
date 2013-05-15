@@ -95,7 +95,7 @@ default. All you have to do to get things off the ground is set a
 `mustache.path` option to tell it where your templates live. But you can swap
 that loader out for [any other Mustache Loader][loader].
 
-For +10 Awesome, you should check out [the Inline template loader][inline]:
+For +10 Awesome, you should check out the Inline template loader:
 
 ```php
 <?php
@@ -120,7 +120,6 @@ Hello, {{ name }}!
 ```
 
  [loader]: https://github.com/bobthecow/mustache.php/wiki/Template-Loading#available-loaders
- [inline]
 
 
 ## The Trait
