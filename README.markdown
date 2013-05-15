@@ -88,15 +88,69 @@ This will render the `hello.mustache` file from your application's `views`
 directory.
 
 
+## Template Loading
+
+The Mustache service provider ships with a Filesystem template loader enabled by
+default. All you have to do to get things off the ground is set a
+`mustache.path` option to tell it where your templates live. But you can swap
+that loader out for [any other Mustache Loader][loader].
+
+For +10 Awesome, you should check out [the Inline template loader][inline]:
+
+```php
+<?php
+
+// ...
+
+$app->register(new MustacheServiceProvider, array(
+    'mustache.loader' => new Mustache_Loader_InlineLoader(__FILE__, __COMPILER_HALT_OFFSET__)
+));
+
+$app->get('/{name}', function($name) use ($app) {
+    return $app['mustache']->render('hello', compact('name'));
+})
+->value('name', 'world');
+
+// ...
+
+__halt_compiler();
+
+@@ hello
+Hello, {{ name }}!
+```
+
+ [loader]: https://github.com/bobthecow/mustache.php/wiki/Template-Loading#available-loaders
+ [inline]
+
+
 ## The Trait
 
 `Mustache\Silex\Application\MustacheTrait` adds a `render` helper to your app:
 
 ```php
 <?php
+use Silex\Application;
+
+class MyApplication extends Application
+{
+    use \Mustache\Silex\Application\MustacheTrait;
+}
+
+$app = new MyApplication;
+```
+
+Now you can just call render:
+
+```php
+<?php
 
 return $app->render('hello', array('name' => 'Justin'));
+```
 
+Or BYO Response:
+
+```php
+<?php
 $response = new Response;
 $response->setTtl(10);
 
@@ -104,7 +158,7 @@ return $app->render('hello', array('name' => 'Justin'), $response);
 ```
 
 It also provides a `renderTemplate` helper which returns a rendered string
-instead of a Response object.
+instead of a `Response` object.
 
 
 ## Customization
