@@ -129,9 +129,28 @@ Hello, {{ name }}!
 
 ```php
 <?php
+use Silex\Application;
+
+class MyApplication extends Application
+{
+    use \Mustache\Silex\Application\MustacheTrait;
+}
+
+$app = new MyApplication;
+```
+
+Now you can just call render:
+
+```php
+<?php
 
 return $app->render('hello', array('name' => 'Justin'));
+```
 
+Or BYO Response:
+
+```php
+<?php
 $response = new Response;
 $response->setTtl(10);
 
@@ -139,7 +158,7 @@ return $app->render('hello', array('name' => 'Justin'), $response);
 ```
 
 It also provides a `renderTemplate` helper which returns a rendered string
-instead of a Response object.
+instead of a `Response` object.
 
 
 ## Customization
