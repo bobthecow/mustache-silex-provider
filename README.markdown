@@ -14,7 +14,7 @@ Add `mustache/silex-provider` to your project's `composer.json`:
 ```json
 {
     "require": {
-        "mustache/silex-provider": "*"
+        "mustache/silex-provider": "~1.0"
     }
 }
 ```
