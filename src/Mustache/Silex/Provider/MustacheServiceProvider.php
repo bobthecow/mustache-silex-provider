@@ -29,6 +29,7 @@ class MustacheServiceProvider implements ServiceProviderInterface
             $defaults = array(
                 'loader'          => $app['mustache.loader'],
                 'partials_loader' => $app['mustache.partials_loader'],
+                'helpers'         => $app['mustache.helpers'],
                 'charset'         => $app['charset'],
             );
 
