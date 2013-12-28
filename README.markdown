@@ -38,9 +38,13 @@ php composer.phar install
  * `mustache.partials` (optional): An associative array of template names to
    template contents. Use this if you want to define partials inline.
 
+ * `mustache.helpers` (optional): An associative array of Mustache helpers.
+   See [the Mustache.php helpers documentation][helpers] for more information.
+
  * `mustache.options` (optional): An associative array of Mustache options. See
    [the Mustache.php documentation][options] for more information.
 
+ [helpers]: https://github.com/bobthecow/mustache.php/wiki#helpers
  [options]: https://github.com/bobthecow/mustache.php/wiki
 
 
