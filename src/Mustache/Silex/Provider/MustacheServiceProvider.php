@@ -11,8 +11,8 @@
 
 namespace Mustache\Silex\Provider;
 
-use Silex\Application;
-use Silex\ServiceProviderInterface;
+use Pimple\Container;
+use Pimple\ServiceProviderInterface;
 
 /**
  * Mustache integration for Silex.
@@ -21,11 +21,11 @@ use Silex\ServiceProviderInterface;
  */
 class MustacheServiceProvider implements ServiceProviderInterface
 {
-    public function register(Application $app)
+    public function register(Container $app)
     {
         $app['mustache.options'] = array();
 
-        $app['mustache'] = $app->share(function ($app) {
+        $app['mustache'] = function ($app) {
             $defaults = array(
                 'loader'          => $app['mustache.loader'],
                 'partials_loader' => $app['mustache.partials_loader'],
@@ -40,17 +40,17 @@ class MustacheServiceProvider implements ServiceProviderInterface
             $app['mustache.options'] = array_replace($defaults, $app['mustache.options']);
 
             return new \Mustache_Engine($app['mustache.options']);
-        });
+        };
 
-        $app['mustache.loader'] = $app->share(function ($app) {
+        $app['mustache.loader'] = function ($app) {
             if (!isset($app['mustache.path'])) {
                 return new \Mustache_Loader_StringLoader;
             }
 
             return new \Mustache_Loader_FilesystemLoader($app['mustache.path']);
-        });
+        };
 
-        $app['mustache.partials_loader'] = $app->share(function ($app) {
+        $app['mustache.partials_loader'] = function ($app) {
             if (isset($app['mustache.partials_path'])) {
                 return new \Mustache_Loader_FilesystemLoader($app['mustache.partials_path']);
             } elseif (isset($app['mustache.partials'])) {
@@ -58,13 +58,8 @@ class MustacheServiceProvider implements ServiceProviderInterface
             } else {
                 return $app['mustache.loader'];
             }
-        });
+        };
 
         $app['mustache.helpers'] = array();
-    }
-
-    public function boot(Application $app)
-    {
-        // nada
     }
 }
